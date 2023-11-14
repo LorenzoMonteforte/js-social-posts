@@ -28,7 +28,7 @@ const post = [
         like : 100
     }
 ];
-/* Post di esempio da generare con JS */
+/* Mostra in pagina i post contenuti nell'array post */
 const container = document.getElementById("container");
 for(let i=0; i<post.length; i++){
     const codiceHTML = `<div class="post">
@@ -62,4 +62,11 @@ for(let i=0; i<post.length; i++){
                             </div>            
                         </div>`;
     container.innerHTML +=  codiceHTML;
+}
+/* Cambia colore al click sul tasto like */
+const btnLike = document.getElementsByClassName("like-button");
+for(let i=0; i<post.length; i++){
+    btnLike[i].addEventListener("click", function(){
+        btnLike[i].style.color = "blue";
+    });
 }
