@@ -63,10 +63,21 @@ for(let i=0; i<post.length; i++){
                         </div>`;
     container.innerHTML +=  codiceHTML;
 }
-/* Cambia colore al click sul tasto like */
+/* Cambia colore e numero di mi piace al click sul tasto like */
 const btnLike = document.getElementsByClassName("like-button");
+const jsLikesCounter = document.getElementsByClassName("js-likes-counter");
 for(let i=0; i<post.length; i++){
+    let like = false;
     btnLike[i].addEventListener("click", function(){
-        btnLike[i].style.color = "blue";
+        if(like == false){
+            like = true;
+            btnLike[i].style.color = "blue";
+            post[i].like += 1;
+        }else{
+            like = false;
+            btnLike[i].style.color = "#404040";
+            post[i].like -= 1;
+        }
+        jsLikesCounter[i].innerHTML = post[i].like;
     });
 }
