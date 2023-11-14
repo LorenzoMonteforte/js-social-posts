@@ -2,7 +2,10 @@
 const post = [
     {
         id : 1,
-        nome : "Lorenzo Monteforte",
+        generalita : {
+            nome : "Lorenzo",
+            cognome : "Monteforte"
+        },
         foto : "img/user1.jpg",
         data : "2023-11-14",
         testo: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
@@ -11,8 +14,11 @@ const post = [
     },
     {
         id : 2,
-        nome : "Alessio Tosoni",
-        foto : "img/user2.webp",
+        generalita : {
+            nome : "Alessio",
+            cognome : "Tosoni"
+        },
+        foto : "",
         data : "2023-11-13",
         testo : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
         immagine : "",
@@ -20,7 +26,10 @@ const post = [
     },
     {
         id : 3,
-        nome : "Andrea Bartoloni",
+        generalita : {
+            nome : "Andrea",
+            cognome : "Bartoloni"
+        },
         foto : "img/user3.png",
         data : "2023-11-12",
         testo : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
@@ -31,14 +40,19 @@ const post = [
 /* Mostra in pagina i post contenuti nell'array post */
 const container = document.getElementById("container");
 for(let i=0; i<post.length; i++){
+    let immagineProfilo = "";
+    if(post[i].foto == ""){
+        immagineProfilo = `<div>${post[i].generalita.nome.charAt(0) + post[i].generalita.cognome.charAt(0)}</div>`;
+    }else{
+        immagineProfilo = `<img class="profile-pic" src="${post[i].foto}" alt="">`
+    }
     const codiceHTML = `<div class="post">
                             <div class="post__header">
                                 <div class="post-meta">                    
-                                    <div class="post-meta__icon">
-                                        <img class="profile-pic" src="${post[i].foto}" alt="">                    
-                                    </div>
+                                    <div class="post-meta__icon">` + immagineProfilo + 
+                                   `</div>
                                     <div class="post-meta__data">
-                                        <div class="post-meta__author">${post[i].nome}</div>
+                                        <div class="post-meta__author">${post[i].generalita.nome + " " + post[i].generalita.cognome}</div>
                                         <div class="post-meta__time">${post[i].data}</div>
                                     </div>                    
                                 </div>
@@ -62,6 +76,10 @@ for(let i=0; i<post.length; i++){
                             </div>            
                         </div>`;
     container.innerHTML +=  codiceHTML;
+    const postMetaIcon = document.getElementsByClassName("post-meta__icon");
+    postMetaIcon[i].style.display = "flex";
+    postMetaIcon[i].style.alignItems = "center";
+    postMetaIcon[i].style.fontSize = "2rem";
 }
 /* Cambia colore e numero di mi piace al click sul tasto like */
 const btnLike = document.getElementsByClassName("like-button");
