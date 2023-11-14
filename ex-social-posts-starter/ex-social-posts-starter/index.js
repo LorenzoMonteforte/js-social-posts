@@ -66,6 +66,7 @@ for(let i=0; i<post.length; i++){
 /* Cambia colore e numero di mi piace al click sul tasto like */
 const btnLike = document.getElementsByClassName("like-button");
 const jsLikesCounter = document.getElementsByClassName("js-likes-counter");
+const myLike = [];
 for(let i=0; i<post.length; i++){
     let like = false;
     btnLike[i].addEventListener("click", function(){
@@ -73,11 +74,19 @@ for(let i=0; i<post.length; i++){
             like = true;
             btnLike[i].style.color = "blue";
             post[i].like += 1;
+            myLike.push(post[i].id);
         }else{
             like = false;
             btnLike[i].style.color = "#404040";
             post[i].like -= 1;
+            for(let index=0; index<myLike.length; index++){
+                if(post[i].id == myLike[index]){
+                    myLike.splice(index, 1);
+                    break;
+                }
+            }
         }
         jsLikesCounter[i].innerHTML = post[i].like;
+        console.log("ID dei post con il like: " + myLike);
     });
 }
